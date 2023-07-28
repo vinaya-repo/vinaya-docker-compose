@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '75f09b20-17d0-4653-ae88-0b95ebb0f22e'
   imageRepository: 'vinayarepo'
   containerRegistry: 'myregistry9.azurecr.io'
-  dockerfilePath: '\Dockerfile'
+  dockerfilePath: 'C:\agent\_work\2\s\Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
