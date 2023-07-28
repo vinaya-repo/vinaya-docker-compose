@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-compose2-config
+  namespace: mynamespace
+data:
+  key1: value1
+  key2: value2
+  key3: value3

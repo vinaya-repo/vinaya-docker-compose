@@ -1,1 +1,1 @@
-# vinaya-docker-compose
+# dotnet 6 project with angular frontend
