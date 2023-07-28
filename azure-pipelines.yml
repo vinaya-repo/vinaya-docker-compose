@@ -16,9 +16,9 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  # Agent self hosted image name
-  pool:
-    name: 'mypool'
+# Agent self hosted image name
+pool:
+  name: 'mypool'
 
 stages:
 - stage: Build
