@@ -23,7 +23,6 @@ variables:
 pool:
 name: 'mypool'
 
-
 stages:
 - stage: Build
   displayName: Build stage
