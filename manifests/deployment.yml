@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: vinayarepo 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vinayarepo
+  template:
+    metadata:
+      labels:
+        app: vinayarepo 
+    spec:
+      containers:
+        - name: vinayarepo 
+          image: myregistry9.azurecr.io/vinayarepo
+          ports:
+          - containerPort: 5000
