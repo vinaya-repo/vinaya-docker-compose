@@ -45,8 +45,8 @@ stages:
     - upload: manifests
       artifact: manifests
 
-- stage: Deploy
-  displayName: Deploy stage
+- stage: Deploy to stage
+  displayName: Deploy to stage
   dependsOn: Build
 
   jobs:
@@ -54,7 +54,41 @@ stages:
     displayName: Deploy
     pool:
       name: 'mypool'
-    environment: 'vinayarepovinayadockercompose-1064.mynamespace'
+    environment: 'stage'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: KubernetesManifest@0
+            displayName: Create imagePullSecret
+            inputs:
+              kubernetesServiceConnection: $(k8sconnection)
+              action: createSecret
+              secretName: $(imagePullSecret)
+              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+
+          - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
+            inputs:
+              kubernetesServiceConnection: $(k8sconnection)
+              action: deploy
+              manifests: |
+                $(Pipeline.Workspace)/manifests/test.yml
+                $(Pipeline.Workspace)/manifests/service.yml
+              imagePullSecrets: |
+                $(imagePullSecret)
+              containers: |
+                $(containerRegistry)/$(imageRepository):$(tag)
+- stage: Deploy to prod
+  displayName: Deploy to prod
+  dependsOn: Deploy to stage
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    pool:
+      name: 'mypool'
+    environment: 'prod'
     strategy:
       runOnce:
         deploy:
