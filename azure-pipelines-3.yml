@@ -12,7 +12,7 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'mydocker'
-  imageRepository: 'vinayarepo'
+  imageRepository: 'vinaya-repo'
   containerRegistry: 'myregistry9.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
