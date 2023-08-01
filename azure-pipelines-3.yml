@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'mydocker'
   imageRepository: 'vinayarepo'
   containerRegistry: 'myregistry9.azurecr.io'
-  dockerfilePath: 'Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'myregistry98122127e-auth'
   k8sconnection: 'mycluster1-mynamespace'
