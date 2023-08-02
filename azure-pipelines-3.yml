@@ -74,7 +74,7 @@ stages:
               kubernetesServiceConnection: $(k8sconnection)
               kubernetesCluster: 'mycluster1'
               namespace: 'mynamespace'
-              command: 'upgrade'
+              command: 'install'
               chartType: 'Name'
               chartName: 'sample-java'
               waitForExecution: false
