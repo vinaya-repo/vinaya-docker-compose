@@ -74,6 +74,7 @@ stages:
               azureResourceGroupForACR: 'myresourcegrp'
               azureContainerRegistry: 'myregistry9'
               kubernetesCluster: 'mycluster1'
+              kubernetesServiceEndpoint: $(k8sconnection)
               namespace: 'mynamespace'
               command: 'install'
               chartType: 'Name'
