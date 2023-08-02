@@ -45,8 +45,8 @@ stages:
     - upload: manifests
       artifact: manifests
 
-- stage: Deploy_to_stage
-  displayName: Deploy to stage
+- stage: Deploy
+  displayName: Deploy
   dependsOn: Build
 
   jobs:
@@ -66,51 +66,15 @@ stages:
               action: createSecret
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - task: KubernetesManifest@0
+          - task: HelmDeploy@0
             displayName: Deploy to Kubernetes cluster
             inputs:
-              kubernetesServiceConnection: $(k8sconnection)
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/test.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
-- stage: Deploy_to_prod
-  displayName: Deploy to prod
-  dependsOn: Deploy_to_stage
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    pool:
-      name: 'mypool'
-    environment: 'prod'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              kubernetesServiceConnection: $(k8sconnection)
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              kubernetesServiceConnection: $(k8sconnection)
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/test.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
-
+              connectionType: 'Azure Resource Manager'
+              azureSubscription: 'Azure subscription 1(e9271524-7275-4e25-9b3f-f52f6a4e4cac)'
+              azureResourceGroup: 'myresourcegrp'
+              kubernetesCluster: 'mycluster1'
+              namespace: 'mynamespace'
+              command: 'upgrade'
+              chartType: 'Name'
+              chartName: 'sample-java'
+              releaseName: 'helm-release'
