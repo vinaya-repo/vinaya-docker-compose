@@ -70,11 +70,11 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               connectionType: 'Azure Resource Manager'
-              azureSubscription: 'Azure subscription 1(e9271524-7275-4e25-9b3f-f52f6a4e4cac)'
-              azureResourceGroup: 'myresourcegrp'
+              azureSubscriptionForACR: 'Azure subscription 1(e9271524-7275-4e25-9b3f-f52f6a4e4cac)'
+              azureResourceGroupForACR: 'myresourcegrp'
+              azureContainerRegistry: 'myregistry9'
               kubernetesCluster: 'mycluster1'
               namespace: 'mynamespace'
-              command: 'upgrade'
+              command: 'install'
               chartType: 'Name'
               chartName: 'sample-java'
-              releaseName: 'helm-release'
