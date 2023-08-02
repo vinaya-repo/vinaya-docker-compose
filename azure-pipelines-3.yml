@@ -70,8 +70,8 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               connectionType: 'Azure Resource Manager'
-              azureSubscriptionForACR: 'Azure subscription 1(e9271524-7275-4e25-9b3f-f52f6a4e4cac)'
-              azureResourceGroupForACR: 'myresourcegrp'
+              azureSubscription: 'Azure subscription 1(e9271524-7275-4e25-9b3f-f52f6a4e4cac)'
+              azureResourceGroup: 'myresourcegrp'
               azureContainerRegistry: 'myregistry9'
               kubernetesCluster: 'mycluster1'
               kubernetesServiceEndpoint: $(k8sconnection)
